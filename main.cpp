@@ -10,7 +10,6 @@ class Stack {
         Stack() {
             mas = new int[size];
             max = -1;
-            
         }
 
         ~Stack() {
@@ -19,7 +18,6 @@ class Stack {
 
         void add(int num) {
             mas[++max] = num;
-            
         }
 
         int* current_elem() {
@@ -40,21 +38,45 @@ class Stack {
         void print_stack() {
             int temp_size = size_stack();
             Stack temp;
-            
+            cout << endl;
             for (size_t i = 0; i < temp_size; ++i) {
                 
                 temp.add(pop());
             }
             //temp.print_debug();
             for (size_t i = 0; i < temp_size; ++i) {
-                cout << *(temp.current_elem()) << endl;
+                cout << *(temp.current_elem()) << " ";
                 add(temp.pop());
             }
         }
 
-        void print_debug() {
-            for (size_t i = 0; i < 5; ++i) {
-                cout << "Debug: " << mas[i] << "  ";
+        Stack reverse_stack() {
+            int length = size_stack();
+            Stack tempStack;
+            for (size_t i = 0; i < length; ++i) tempStack.add(pop());
+            return tempStack;
+        }
+
+        
+
+        void sort() {
+            int length = size_stack(), temp_elem, temp_length;
+            Stack tempStack;
+            //tempStack.add(pop());
+            for (size_t i = 0; i < length; ++i) {
+                temp_elem = *current_elem();
+                for (size_t j = 0; j < i + 1; ++j) tempStack.add(pop());
+                temp_length = tempStack.size_stack();
+                for (size_t j = 0; j < temp_length; ++j) {
+                    
+                }
+                //print_stack();
+                
+                for (size_t j = 0; j < i + 1; ++j) add(tempStack.pop());
+                //print_stack();
+                //for (int j = i; j > -1; --j) {
+
+                //}
             }
         }
 
@@ -69,6 +91,6 @@ int main() {
     first.add(328);
     first.add(111);
     first.print_stack();
-    //first.print_debug();
+    first.sort();
     
 }
