@@ -4,7 +4,7 @@ using namespace std;
 
 class Stack {
     int size = SIZE;
-    int* mas;
+    public: int* mas;
     int max;
     public:
         Stack() {
@@ -38,7 +38,7 @@ class Stack {
         void print_stack() {
             int temp_size = size_stack();
             Stack temp;
-            cout << endl;
+            
             for (size_t i = 0; i < temp_size; ++i) {
                 
                 temp.add(pop());
@@ -48,32 +48,56 @@ class Stack {
                 cout << *(temp.current_elem()) << " ";
                 add(temp.pop());
             }
-        }
-
-        Stack reverse_stack() {
-            int length = size_stack();
-            Stack tempStack;
-            for (size_t i = 0; i < length; ++i) tempStack.add(pop());
-            return tempStack;
-        }
-
-        
+            
+        }    
 
         void sort() {
             int length = size_stack(), temp_elem, temp_length;
-            Stack tempStack;
+            
             //tempStack.add(pop());
             for (size_t i = 0; i < length; ++i) {
-                temp_elem = *current_elem();
-                for (size_t j = 0; j < i + 1; ++j) tempStack.add(pop());
-                temp_length = tempStack.size_stack();
+                if (i == 0) continue;
+                Stack tempStack;    
+                for (size_t j = 0; j < i; ++j) tempStack.add(pop());
+                temp_elem = pop();
+                //cout << temp_elem << endl;
+                //cout << temp_elem << endl;
+                
+                
+                Stack remain_stack;
+                int temp_length = tempStack.size_stack();
                 for (size_t j = 0; j < temp_length; ++j) {
                     
+                    //cout << *tempStack.current_elem() << " - elem\n";
+                    if (temp_elem >= *tempStack.current_elem()) {
+                        remain_stack.add(tempStack.pop());
+                        //cout << temp_elem << endl;
+                    } else {
+                        tempStack.add(temp_elem);
+                        break;
+                    }
+                    if (j == temp_length - 1) {
+                        tempStack.add(temp_elem);
+                        break;
+                    }
                 }
-                //print_stack();
+                //remain_stack.print_stack();
+                //cout << "- remain_stack\n";
+                //tempStack.print_stack();
+                //cout << "- tempStack before removing remain_stack\n";
+                int remain_length = remain_stack.size_stack();
+                for (size_t j = 0; j < remain_length; ++j) {
+                    tempStack.add(remain_stack.pop());
+                }
                 
-                for (size_t j = 0; j < i + 1; ++j) add(tempStack.pop());
+                //tempStack.print_stack();
+                //cout << "- tempStack after removing remain_stack\n";
+                
+                //cout << tempStack.size_stack() << "\n";
+                temp_length = tempStack.size_stack();
+                for (size_t j = 0; j < temp_length; ++j) add(tempStack.pop());
                 //print_stack();
+                //cout << "- main Stack\n";
                 //for (int j = i; j > -1; --j) {
 
                 //}
@@ -85,12 +109,17 @@ class Stack {
 
 int main() {
     Stack first;
-    first.add(5);
     first.add(4);
-    first.add(57);
-    first.add(328);
-    first.add(111);
+    first.add(5);
+    first.add(1);
+    first.add(4);
+    first.add(3);
+    first.add(2);
+    first.add(2);
+    //first.sort();
     first.print_stack();
+    cout << "\n";
     first.sort();
+    first.print_stack();
     
 }
