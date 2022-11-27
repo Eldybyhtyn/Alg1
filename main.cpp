@@ -21,21 +21,21 @@ class Stack {
 
         void add(int num) { // 4
             mas[++max] = num; 
-            N_op += 4;
+            
         }
 
         int* current_elem() { // 2
-            N_op += 2;
+            
             return mas + max;
         }
         
         int size_stack() { // 2
-            N_op += 2;
+            
             return max + 1;
         }
 
         int pop() { // 5
-            N_op += 5;
+           
             int pop_item = *current_elem(); // 3
             --max; // 1
             return pop_item; // 1
@@ -59,12 +59,14 @@ class Stack {
 
         void sort() {
             int length = size_stack(), temp_elem, temp_length; // 1
+            cout << length << endl;
             N_op += 3;
             for (size_t i = 1; i < length; ++i) { // 2
                 N_op += 2;
                 Stack tempStack;
                 N_op += 2;
                 for (size_t j = 0; j < i; ++j) {
+                    cout << j << " ";
                     N_op += 11;
                     tempStack.add(pop()); // 13
                 }
@@ -79,7 +81,7 @@ class Stack {
                     N_op += 3;
                     if (temp_elem >= *tempStack.current_elem()) { // 3
                         N_op += 9;
-                        ++counter;
+                        //++counter;
                         remain_stack.add(tempStack.pop()); // 9
                     } else {
                         cout << "lalala" << " ";
@@ -87,19 +89,13 @@ class Stack {
                         tempStack.add(temp_elem); // 4
                         break; // 1
                     }
-                    //N_op += 2;
-                    // if (j == i - 1) { // 2
-                    //     cout << "hello ";
-                    //     N_op += 5;
-                    //     tempStack.add(temp_elem); // 4
-                    //     break; // 1
-                    // }
+                    
                 } // 2
                 N_op += 2;
                 tempStack.add(temp_elem); // 2
                 int remain_length = remain_stack.size_stack(); // 3
-                cout << counter << " " << i << " " << remain_length << endl;
-                counter = 0;
+                //cout << counter << " " << i << " " << remain_length << endl;
+                //counter = 0;
                 N_op += 2;
                 for (size_t j = 0; j < i; ++j) { // 2
                     N_op += 2;
@@ -122,7 +118,7 @@ class Stack {
 int main() {
     int time_start, time_end;
     Stack first;
-    for (int i = 1; i < 30; i++) {
+    for (int i = 0; i < 30; i++) {
         first.add(30 - i);
     }
     //first.sort();
@@ -137,3 +133,5 @@ int main() {
     
     
 }
+
+// F(n) = 24n^2 + 109n + 3
